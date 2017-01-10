@@ -86,7 +86,7 @@ container('config.finder')->addPaths([
  * Autoloading.
  */
 $loader = new ClassLoader();
-$classes = container('config')->get($vars['config'].'_loading');
+$classes = container('config.factory')->get($vars['config'].'_loading');
 foreach ($classes as $prefix => $path) {
     $loader->addPsr4($prefix, $path);
 }
@@ -107,7 +107,7 @@ container('view.finder')->addLocation(themosis_path('plugin.'.$vars['namespace']
 /*
  * Service providers.
  */
-$providers = container('config')->get($vars['config'].'_providers');
+$providers = container('config.factory')->get($vars['config'].'_providers');
 
 foreach ($providers as $provider) {
     container()->register($provider);
