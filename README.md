@@ -9,4 +9,4 @@ the Themosis framework API.
 Easily extends WordPress. Build administration features, define front-end custom routes,
 add custom API endpoints,... all from the plugin.
 
-[Read the documentation](http://framework.themosis.com/) on the Themosis framework website and start developing your own plugins.
+[Read the documentation](https://framework.themosis.com/docs/1.3/plugin/) on the Themosis framework website and start developing your own plugins.
