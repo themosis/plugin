@@ -6,142 +6,76 @@
  * Description: Plugin description.
  * Version: 1.0.0
  * Author: Your name
- * Author URI: http://framework.themosis.com/
- * Text Domain: plugin-textdomain.
+ * Author URI: https://framework.themosis.com/
+ * Text Domain: plugin-textdomain
  * Domain Path: /languages
+ * Domain Var: PLUGIN_TD
+ * Plugin Namespace: tld_domain_plugin
  */
 
-/**
- * Use statements. Add any useful class import
- * below.
- */
-use Composer\Autoload\ClassLoader;
+use Themosis\Core\Application;
 
 /*
- * Default constants.
- */
-defined('DS') ? DS : define('DS', DIRECTORY_SEPARATOR);
+|--------------------------------------------------------------------------
+| Bootstrap Plugin
+|--------------------------------------------------------------------------
+|
+| We bootstrap the plugin. The following code is loading your plugin
+| configuration and resources.
+*/
+$plugin = (Application::getInstance())->loadPlugin(__FILE__, 'config');
 
 /*
- * Always define the following constant to help you handle
- * your plugin text domain. Make sure to define the same value as
- * the one defined in the plugin header comments text domain.
- *
- * Please update (search and replace) all constants calls found in this file.
- *
- * TODO: #1
- * TODO: #2 - Update plugin textdomain first argument below.
- */
-defined('MY_PLUGIN_TD') ? MY_PLUGIN_TD : define('MY_PLUGIN_TD', 'plugin-textdomain');
-
-/*
- * Plugin variables.
- * Configure your plugin.
- *
- * TODO: #3 - Define your own values.
- * TODO: #4 - Update the config files names located into the `resources/config` folder.
- * TODO: #5 - Update class namespaces.
- */
-$vars = [
-    'slug' => 'plugin-key',
-    'name' => 'Plugin Name',
-    'namespace' => 'tld.domain.plugin',
-    'config' => 'tld_domain_plugin',
-];
-
-/*
- * Verify that the main framework is loaded.
- */
-add_action('admin_notices', function () use ($vars) {
-    if (!class_exists('\Themosis\Foundation\Application')) {
-        printf('<div class="notice notice-error"><p>%s</p></div>', __('This plugin requires the Themosis framework in order to work.', MY_PLUGIN_TD));
-    }
-
-    /*
-     * Define your plugin theme support key. Once defined, make sure to add the key
-     * into your theme `supports.config.php` in order to remove this admin notice.
-     */
-    if (!current_theme_supports($vars['slug']) && current_user_can('switch_themes')) {
-        printf('<div class="notice notice-warning"><p>%s<strong>%s</strong></p></div>', __('Your application does not handle the following plugin: ', MY_PLUGIN_TD), $vars['name']);
-    }
-});
-
-/*
- * Setup the plugin paths.
- */
-$paths['plugin.'.$vars['namespace']] = __DIR__.DS;
-$paths['plugin.'.$vars['namespace'].'.resources'] = __DIR__.DS.'resources'.DS;
-$paths['plugin.'.$vars['namespace'].'.admin'] = __DIR__.DS.'resources'.DS.'admin'.DS;
-
-themosis_set_paths($paths);
-
-/*
- * Setup plugin config files.
- */
-container('config.finder')->addPaths([
-    themosis_path('plugin.'.$vars['namespace'].'.resources').'config'.DS,
+|--------------------------------------------------------------------------
+| Plugin assets locations
+|--------------------------------------------------------------------------
+|
+| You can define your plugin assets paths and URLs. You can add as many
+| locations as you want. The key is your asset directory path and
+| the value is its public URL.
+*/
+$plugin->assets([
+    $plugin->getPath('dist') => $plugin->getUrl('dist')
 ]);
 
 /*
- * Autoloading.
- */
-$loader = new ClassLoader();
-$classes = container('config.factory')->get($vars['config'].'_loading');
-foreach ($classes as $prefix => $path) {
-    $loader->addPsr4($prefix, $path);
-}
-$loader->register();
+|--------------------------------------------------------------------------
+| Plugin i18n | l10n
+|--------------------------------------------------------------------------
+|
+| Registers the "languages" directory for storing the plugin translations.
+| The plugin text domain constant name is the plugin "Domain Var" header
+| and its value the "Text Domain" header.
+*/
+load_plugin_textdomain(
+    $plugin->getHeader('text_domain'),
+    false,
+    $plugin->getPath(trim($plugin->getHeader('domain_path'), '\/'))
+);
 
 /*
- * Register plugin public assets folder [dist directory].
- */
-container('asset.finder')->addPaths([
-    plugins_url('dist', __FILE__) => themosis_path('plugin.'.$vars['namespace']).'dist',
+|--------------------------------------------------------------------------
+| Plugin includes
+|--------------------------------------------------------------------------
+|
+| Auto includes files by providing one or more paths. By default, we setup
+| an "inc" directory within the plugin. Use that "inc" directory to extend
+| your WordPress application. Nested files are also included.
+*/
+$plugin->includes([
+    $plugin->getPath('inc')
 ]);
 
 /*
- * Register plugin views.
- */
-container('view.finder')->addLocation(themosis_path('plugin.'.$vars['namespace'].'.resources').'views');
-
-/*
- * Update Twig Loader registered paths.
- */
-container('twig.loader')->setPaths(container('view.finder')->getPaths());
-
-/*
- * Service providers.
- */
-$providers = container('config.factory')->get($vars['config'].'_providers');
-
-foreach ($providers as $provider) {
-    container()->register($provider);
-}
-
-/*
- * Admin files autoloading.
- * I18n.
- */
-container('action')->add('plugins_loaded', function () use ($vars) {
-
-	/**
-	 * I18n
-	 * Todo: #2 - Replace constant below.
-	 */
-	load_plugin_textdomain(MY_PLUGIN_TD, false, trailingslashit(dirname(plugin_basename(__FILE__))).'languages');
-
-    /*
-     * Plugin admin files.
-     * Autoload files in alphabetical order.
-     */
-    $loader = container('loader')->add([
-        themosis_path('plugin.'.$vars['namespace'].'.admin'),
-    ]);
-
-    $loader->load();
-
-});
-
-/*
- * Add extra features below.
- */
+|--------------------------------------------------------------------------
+| Plugin assets
+|--------------------------------------------------------------------------
+|
+| Here you can define the loaded assets from our previously defined
+| "dist" directory. Assets sources are located under the root "assets"
+| directory and are then compiled, thanks to Laravel Mix, to the "dist"
+| folder.
+|
+| @see https://framework.themosis.com/docs/
+| @see https://laravel-mix.com/
+*/

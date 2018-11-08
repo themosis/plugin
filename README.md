@@ -1,12 +1,11 @@
 Plugin boilerplate
 ==================
 
-The Themosis framework plugin boilerplate.
+Build your custom plugin using this Themosis framework plugin boilerplate.
 
-Download this repository in order to develop your own WordPress plugin by leveraging
-the Themosis framework API.
+The plugin is configured to work on a Themosis framework like environment only.
 
 Easily extends WordPress. Build administration features, define front-end custom routes,
 add custom API endpoints,... all from the plugin.
 
-[Read the documentation](https://framework.themosis.com/docs/1.3/plugin/) on the Themosis framework website and start developing your own plugins.
+[Read the documentation](https://framework.themosis.com/docs/2.0/plugin/) on the Themosis framework website and start developing your own plugin.
