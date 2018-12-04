@@ -3,6 +3,7 @@
 /**
  * Plugin Name: Plugin Name
  * Plugin URI: http://www.domain.tld
+ * Plugin Prefix: tld_domain_plugin
  * Description: Plugin description.
  * Version: 1.0.0
  * Author: Your name
@@ -10,7 +11,6 @@
  * Text Domain: plugin-textdomain
  * Domain Path: /languages
  * Domain Var: PLUGIN_TD
- * Plugin Namespace: tld_domain_plugin
  */
 
 use Themosis\Core\Application;
@@ -24,19 +24,6 @@ use Themosis\Core\Application;
 | configuration and resources.
 */
 $plugin = (Application::getInstance())->loadPlugin(__FILE__, 'config');
-
-/*
-|--------------------------------------------------------------------------
-| Plugin assets locations
-|--------------------------------------------------------------------------
-|
-| You can define your plugin assets paths and URLs. You can add as many
-| locations as you want. The key is your asset directory path and
-| the value is its public URL.
-*/
-$plugin->assets([
-    $plugin->getPath('dist') => $plugin->getUrl('dist')
-]);
 
 /*
 |--------------------------------------------------------------------------
@@ -55,7 +42,40 @@ load_plugin_textdomain(
 
 /*
 |--------------------------------------------------------------------------
-| Plugin includes
+| Plugin Assets Locations
+|--------------------------------------------------------------------------
+|
+| You can define your plugin assets paths and URLs. You can add as many
+| locations as you want. The key is your asset directory path and
+| the value is its public URL.
+*/
+$plugin->assets([
+    $plugin->getPath('dist') => $plugin->getUrl('dist')
+]);
+
+/*
+|--------------------------------------------------------------------------
+| Plugin Views
+|--------------------------------------------------------------------------
+|
+| Register the plugin "views" directory. You can configure the list of
+| view directories from the "config/prefix_plugin.php" configuration file.
+*/
+$plugin->views($plugin->config('plugin.views', []));
+
+/*
+|--------------------------------------------------------------------------
+| Plugin Service Providers
+|--------------------------------------------------------------------------
+|
+| Register the plugin "views" directory. You can configure the list of
+| view directories from the "config/prefix_plugin.php" configuration file.
+*/
+$plugin->providers($plugin->config('plugin.providers', []));
+
+/*
+|--------------------------------------------------------------------------
+| Plugin Includes
 |--------------------------------------------------------------------------
 |
 | Auto includes files by providing one or more paths. By default, we setup
@@ -65,17 +85,3 @@ load_plugin_textdomain(
 $plugin->includes([
     $plugin->getPath('inc')
 ]);
-
-/*
-|--------------------------------------------------------------------------
-| Plugin assets
-|--------------------------------------------------------------------------
-|
-| Here you can define the loaded assets from our previously defined
-| "dist" directory. Assets sources are located under the root "assets"
-| directory and are then compiled, thanks to Laravel Mix, to the "dist"
-| folder.
-|
-| @see https://framework.themosis.com/docs/
-| @see https://laravel-mix.com/
-*/
