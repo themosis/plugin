@@ -11,6 +11,8 @@
  * Text Domain: plugin-textdomain
  * Domain Path: /languages
  * Domain Var: PLUGIN_TD
+ * License: GPL-2.0-or-later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
 
 use Themosis\Core\Application;
