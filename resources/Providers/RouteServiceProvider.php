@@ -25,7 +25,7 @@ class RouteServiceProvider extends ServiceProvider
     public function map()
     {
         $pluginName = ltrim(
-            str_replace(plugins_path(), '', realpath(__DIR__.'/../../')),
+            str_replace(dummy_path(), '', realpath(__DIR__.'/../../')),
             '\/'
         );
 
