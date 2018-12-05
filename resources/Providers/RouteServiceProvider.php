@@ -31,6 +31,6 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::middleware('web')
             ->namespace($this->namespace)
-            ->group(plugins_path($pluginName.'/routes.php'));
+            ->group(dummy_path($pluginName.'/routes.php'));
     }
 }
