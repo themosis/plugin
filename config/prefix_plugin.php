@@ -14,7 +14,7 @@ return [
     |
     */
     'autoloading' => [
-        'DummyNamespaceString' => 'resources'
+        'DummyNamespacePsr' => 'resources'
     ],
 
     /*
