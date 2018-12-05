@@ -1,6 +1,6 @@
 <?php
 
-namespace Tld\Domain\Plugin\Providers;
+namespace DummyNamespace\Providers;
 
 use Themosis\Core\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Themosis\Support\Facades\Route;
@@ -12,7 +12,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'Tld\Domain\Plugin\Controllers';
+    protected $namespace = 'DummyNamespace\Controllers';
 
     public function boot()
     {

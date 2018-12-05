@@ -1,6 +1,6 @@
 <?php
 
-use Tld\Domain\Plugin\Providers\RouteServiceProvider;
+use DummyNamespace\Providers\RouteServiceProvider;
 
 return [
     /*
@@ -14,7 +14,7 @@ return [
     |
     */
     'autoloading' => [
-        'Tld\\Domain\\Plugin\\' => 'resources'
+        'DummyNamespaceString' => 'resources'
     ],
 
     /*
