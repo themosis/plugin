@@ -10,6 +10,7 @@ let mix = require('laravel-mix');
  | file for your application, as well as bundling up your JS files.
  |
  */
+mix.setPublicPath('./');
 
 mix.js('assets/js/index.js', 'dist/').sass('assets/sass/style.scss', 'dist/');
 
