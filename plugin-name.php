@@ -36,9 +36,8 @@ $plugin = (Application::getInstance())->loadPlugin(__FILE__, 'config');
 | The plugin text domain constant name is the plugin "Domain Var" header
 | and its value the "Text Domain" header.
 */
-load_plugin_textdomain(
+load_themosis_plugin_textdomain(
     $plugin->getHeader('text_domain'),
-    false,
     $plugin->getPath(trim($plugin->getHeader('domain_path'), '\/'))
 );
 
