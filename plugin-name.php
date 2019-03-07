@@ -9,7 +9,7 @@
  * Author: Your name
  * Author URI: https://framework.themosis.com/
  * Text Domain: plugin-textdomain
- * Domain Path: /languages
+ * Domain Path: languages
  * Domain Var: PLUGIN_TD
  * License: GPL-2.0-or-later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -38,7 +38,7 @@ $plugin = (Application::getInstance())->loadPlugin(__FILE__, 'config');
 */
 load_themosis_plugin_textdomain(
     $plugin->getHeader('text_domain'),
-    $plugin->getPath(trim($plugin->getHeader('domain_path'), '\/'))
+    $plugin->getPath($plugin->getHeader('domain_path'))
 );
 
 /*
