@@ -4,6 +4,7 @@
  * Plugin Name: Plugin Name
  * Plugin URI: http://www.domain.tld
  * Plugin Prefix: tld_domain_plugin
+ * Plugin ID: plugin-name
  * Description: Plugin description.
  * Version: 1.0.0
  * Author: Your name
