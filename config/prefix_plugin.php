@@ -33,6 +33,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Plugin Hooks
+    |--------------------------------------------------------------------------
+    |
+    | The hooks listed here will be automatically loaded on the
+    | request to your application. Feel free to add your own hooks to
+    | this array to grant expanded functionality to your application.
+    |
+    */
+    'hooks' => [],
+
+    /*
+    |--------------------------------------------------------------------------
     | Plugin views directories path.
     |--------------------------------------------------------------------------
     |
